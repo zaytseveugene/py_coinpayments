@@ -212,8 +212,7 @@ class CryptoPayments:
                        'format': self.format})
         return self.request('post', **params)
 
-    @staticmethod
-    def validate_mac(uuid, price, currency, test_hash):
+    def validate_mac(self, uuid, price, currency, test_hash):
         to_check = API_KEY + '_' + uuid + '_' + str(int(price * 100)) + currency
         computed_hash = hashlib.sha256(to_check).hexdigest()
         return computed_hash == test_hash
